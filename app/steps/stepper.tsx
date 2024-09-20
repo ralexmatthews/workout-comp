@@ -21,7 +21,7 @@ const isActive = (activeStep: Steps, index: number) =>
   stepsInOrder.indexOf(activeStep) >= index;
 
 const Stepper = ({ step }: { step: Steps }) => (
-  <div className="overflow-x-auto w-full px-4">
+  <div className="w-fit px-4 mx-auto">
     <ul className="steps">
       <li className={`step ${isActive(step, 0) ? "step-primary" : ""}`.trim()}>
         Who

@@ -52,7 +52,7 @@ export default function Add() {
 
   return (
     <div className="h-full flex flex-col items-center justify-center gap-4">
-      <div className="w-full absolute top-8 mx-auto">
+      <div className="w-full absolute top-8 overflow-x-auto">
         <Stepper step={step} />
       </div>
       {step === "who" && (
