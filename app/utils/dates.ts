@@ -10,7 +10,7 @@ import {
   setMonth,
   setYear,
 } from "date-fns";
-import { SheetDatum } from "./google_sheets";
+import type { SheetDatum } from "./google_sheets";
 
 /**
  * Converts the google sheet date string to an actual date

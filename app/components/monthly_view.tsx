@@ -1,13 +1,7 @@
 import { useMemo } from "react";
 import { format, startOfWeek } from "date-fns";
-import { SheetDatum } from "~/utils/google_sheets";
-import {
-  createDate,
-  getMonthsRecords,
-  getReferenceDatesForMonth,
-  getWeeklyScore,
-  getWeeksRecords,
-} from "~/utils/dates";
+import type { SheetDatum } from "~/utils/google_sheets";
+import { getReferenceDatesForMonth, getWeeksRecords } from "~/utils/dates";
 
 const getStatsByWeek = (data: SheetDatum[]) => {
   const referenceDates = getReferenceDatesForMonth(new Date());
@@ -72,7 +66,7 @@ export default function MonthlyView({
       Jon: getStatsByWeek(data.Jon),
       Keely: getStatsByWeek(data.Keely),
     }),
-    []
+    [data]
   );
   const thisMonthsScore = useMemo(
     () => ({
@@ -83,7 +77,7 @@ export default function MonthlyView({
       Jon: getMonthlyScore(thisMonthsStatsByWeek.Jon),
       Keely: getMonthlyScore(thisMonthsStatsByWeek.Keely),
     }),
-    []
+    [thisMonthsStatsByWeek]
   );
 
   const monthlyOrder = useMemo(() => {
@@ -93,7 +87,7 @@ export default function MonthlyView({
       keyof typeof thisMonthsScore,
       number
     ][];
-  }, []);
+  }, [thisMonthsScore]);
 
   return (
     <div className="w-full join join-vertical">

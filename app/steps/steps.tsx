@@ -13,6 +13,7 @@ const StepsStep = ({ onPress }: { onPress: (steps: number) => void }) => {
         type="number"
       />
       <button
+        type="button"
         onClick={() => {
           onPress(Number(stepsText));
         }}

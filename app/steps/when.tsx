@@ -17,7 +17,11 @@ const WhenStep = ({ onPress }: { onPress: (when: string) => void }) => {
         min="2024-08-22"
         max={max}
       />
-      <button onClick={() => onPress(value)} className="btn btn-primary w-48">
+      <button
+        type="button"
+        onClick={() => onPress(value)}
+        className="btn btn-primary w-48"
+      >
         Confirm
       </button>
     </>

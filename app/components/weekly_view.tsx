@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { format } from "date-fns";
-import { SheetDatum } from "~/utils/google_sheets";
+import type { SheetDatum } from "~/utils/google_sheets";
 import { createDate, getWeeklyScore, getWeeksRecords } from "~/utils/dates";
 
 export default function WeeklyView({
@@ -24,7 +24,7 @@ export default function WeeklyView({
       Jon: getWeeksRecords(data.Jon),
       Keely: getWeeksRecords(data.Keely),
     }),
-    []
+    [data]
   );
   const thisWeeksScore = useMemo(
     () => ({
@@ -35,7 +35,7 @@ export default function WeeklyView({
       Jon: getWeeklyScore(thisWeeksData.Jon),
       Keely: getWeeklyScore(thisWeeksData.Keely),
     }),
-    []
+    [thisWeeksData]
   );
 
   const weeklyOrder = useMemo(() => {
@@ -45,7 +45,7 @@ export default function WeeklyView({
       keyof typeof thisWeeksScore,
       number
     ][];
-  }, []);
+  }, [thisWeeksScore]);
 
   return (
     <div className="w-full join join-vertical">
