@@ -28,8 +28,9 @@ export default function View() {
   return (
     <div className="flex flex-col items-center justify-start gap-4 pt-8 px-8">
       <h1 className="text-3xl font-bold">Standings</h1>
-      <div role="tablist" className="w-full flex bg-black text-white">
+      <div className="w-full flex bg-black text-white">
         <button
+          type="button"
           onClick={() => setViewType("weekly")}
           role="tab"
           className={`flex-1 btn ${
@@ -39,6 +40,7 @@ export default function View() {
           Weekly
         </button>
         <button
+          type="button"
           onClick={() => setViewType("monthly")}
           role="tab"
           className={`flex-1 btn ${

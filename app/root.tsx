@@ -25,16 +25,16 @@ export const links: LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="mytheme">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen flex flex-col">
+      <body className="h-screen flex flex-col bg-base-100">
         <Header />
-        <div className="flex-1 relative">{children}</div>
+        <div className="flex-1 h-full relative">{children}</div>
         <ScrollRestoration />
         <Scripts />
       </body>
