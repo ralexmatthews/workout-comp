@@ -20,7 +20,7 @@
     "rules": {
       "recommended": true,
       "performance": {
-        "noAccumulatingSpread": "off"
+        "noAccumulatingSpread": "info"
       },
       "correctness": {
         "noUnusedImports": "error",
