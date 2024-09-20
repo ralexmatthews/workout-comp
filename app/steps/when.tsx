@@ -11,13 +11,13 @@ const WhenStep = ({ onPress }: { onPress: (when: string) => void }) => {
       <h1 className="text-3xl font-bold">When is this for?</h1>
       <input
         type="date"
-        className="input input-primary text-black"
+        className="input input-primary text-white"
         value={value}
         onChange={(v) => setValue(v.target.value)}
         min="2024-08-22"
         max={max}
       />
-      <button onClick={() => onPress("Alex")} className="btn btn-primary w-48">
+      <button onClick={() => onPress(value)} className="btn btn-primary w-48">
         Confirm
       </button>
     </>

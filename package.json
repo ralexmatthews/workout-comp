@@ -15,6 +15,8 @@
     "@remix-run/react": "^2.12.0",
     "@remix-run/serve": "^2.12.0",
     "date-fns": "^4.1.0",
+    "google-auth-library": "^9.14.1",
+    "google-spreadsheet": "^4.1.4",
     "isbot": "^4.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

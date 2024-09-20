@@ -7,7 +7,7 @@ const StepsStep = ({ onPress }: { onPress: (steps: number) => void }) => {
     <>
       <h1 className="text-3xl font-bold">How many steps?</h1>
       <input
-        className="input input-bordered input-primary text-black text-center"
+        className="input input-bordered input-primary text-center"
         value={stepsText}
         onChange={(v) => setStepsText(v.target.value)}
         type="number"
