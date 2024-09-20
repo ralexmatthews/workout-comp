@@ -26,7 +26,7 @@ export default function View() {
   const [viewType, setViewType] = useState<"weekly" | "monthly">("weekly");
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start gap-4 pt-8 px-8">
+    <div className="flex flex-col items-center justify-start gap-4 pt-8 px-8">
       <h1 className="text-3xl font-bold">Standings</h1>
       <div role="tablist" className="w-full flex bg-black text-white">
         <button

@@ -51,8 +51,8 @@ export default function Add() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-4">
-      <div className="w-full absolute top-12 mx-auto">
+    <div className="h-full flex flex-col items-center justify-center gap-4">
+      <div className="w-full absolute top-8 mx-auto">
         <Stepper step={step} />
       </div>
       {step === "who" && (

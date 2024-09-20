@@ -13,7 +13,7 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className="h-full flex flex-col items-center justify-center">
       <div className="flex flex-col items-center justify-center gap-4 px-4 text-center">
         <h1 className="text-3xl font-bold">The Matthews Fitness Tracker</h1>
         <div className="btn btn-primary">
