@@ -1,7 +1,12 @@
 import { useState } from "react";
 
-const StepsStep = ({ onPress }: { onPress: (steps: number) => void }) => {
+const StepsStep = ({
+  onPress,
+}: {
+  onPress: (steps: number) => Promise<void>;
+}) => {
   const [stepsText, setStepsText] = useState("");
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
@@ -15,9 +20,10 @@ const StepsStep = ({ onPress }: { onPress: (steps: number) => void }) => {
       <button
         type="button"
         onClick={() => {
-          onPress(Number(stepsText));
+          setLoading(true);
+          onPress(Number(stepsText)).finally(() => setLoading(false));
         }}
-        disabled={!(Number(stepsText) > 0)}
+        disabled={!(Number(stepsText) > 0) || loading}
         className="btn btn-primary w-48"
       >
         Confirm
