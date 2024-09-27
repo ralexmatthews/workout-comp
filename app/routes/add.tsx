@@ -39,6 +39,25 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+const getPreviousStep = (step: Steps) => {
+  switch (step) {
+    case "who":
+      return "who";
+    case "when":
+      return "who";
+    case "move":
+      return "when";
+    case "stand":
+      return "move";
+    case "exercise":
+      return "stand";
+    case "bonus":
+      return "exercise";
+    case "steps":
+      return "bonus";
+  }
+};
+
 export default function Add() {
   const [step, setStep] = useState<Steps>("who");
   const [date, setDate] = useState("");
@@ -126,6 +145,15 @@ export default function Add() {
             }
           }}
         />
+      )}
+      {step !== "who" && (
+        <button
+          className="mt-4 btn btn-secondary w-48"
+          type="button"
+          onClick={() => setStep(getPreviousStep(step))}
+        >
+          Back
+        </button>
       )}
     </div>
   );
