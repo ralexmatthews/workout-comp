@@ -105,10 +105,19 @@ const normalizeRow = (
   steps: Number(row.get("steps")),
 });
 
+export type AllData = {
+  Alex: SheetDatum[];
+  Darby: SheetDatum[];
+  Mom: SheetDatum[];
+  Dad: SheetDatum[];
+  Jon: SheetDatum[];
+  Keely: SheetDatum[];
+};
+
 /**
  * Gets all the data in our spreadsheet, for all people
  */
-export const getAllData = async () => {
+export const getAllData = async (): Promise<AllData> => {
   const doc = await getGoogleSheet();
 
   const names = ["Alex", "Darby", "Mom", "Dad", "Jon", "Keely"];

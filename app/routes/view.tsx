@@ -1,6 +1,7 @@
 import { type MetaFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useState } from "react";
+import ChartView from "~/components/chart_view";
 import MonthlyView from "~/components/monthly_view";
 import WeeklyView from "~/components/weekly_view";
 import { getAllData } from "~/utils/google_sheets";
@@ -23,7 +24,9 @@ export const loader = async () => {
 export default function View() {
   const data = useLoaderData<typeof loader>();
 
-  const [viewType, setViewType] = useState<"weekly" | "monthly">("weekly");
+  const [viewType, setViewType] = useState<"weekly" | "monthly" | "chart">(
+    "weekly"
+  );
 
   return (
     <div className="flex flex-col items-center justify-start gap-4 pt-8 px-8">
@@ -49,9 +52,20 @@ export default function View() {
         >
           Monthly
         </button>
+        <button
+          type="button"
+          onClick={() => setViewType("chart")}
+          role="tab"
+          className={`flex-1 btn ${
+            viewType === "chart" ? "btn-primary" : ""
+          }`.trim()}
+        >
+          Chart
+        </button>
       </div>
       {viewType === "weekly" && <WeeklyView data={data} />}
       {viewType === "monthly" && <MonthlyView data={data} />}
+      {viewType === "chart" && <ChartView data={data} />}
     </div>
   );
 }

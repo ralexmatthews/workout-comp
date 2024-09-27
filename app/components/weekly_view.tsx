@@ -1,20 +1,9 @@
 import { useMemo } from "react";
 import { format } from "date-fns";
-import type { SheetDatum } from "~/utils/google_sheets";
+import type { AllData } from "~/utils/google_sheets";
 import { createDate, getWeeklyScore, getWeeksRecords } from "~/utils/dates";
 
-export default function WeeklyView({
-  data,
-}: {
-  data: {
-    Alex: SheetDatum[];
-    Darby: SheetDatum[];
-    Mom: SheetDatum[];
-    Dad: SheetDatum[];
-    Jon: SheetDatum[];
-    Keely: SheetDatum[];
-  };
-}) {
+export default function WeeklyView({ data }: { data: AllData }) {
   const thisWeeksData = useMemo(
     () => ({
       Alex: getWeeksRecords(data.Alex),
