@@ -86,20 +86,42 @@ const ChartView = ({ data }: { data: AllData }) => {
           <span>28</span>
         </div>
       </div>
-      <div className="w-full overflow-x-auto mx-auto">
-        <LineChart data={normalizedData} width={730} height={400}>
-          <CartesianGrid strokeDasharray="5" />
-          <XAxis dataKey="name" />
-          <YAxis scale="linear" interval={0} domain={[0, "dataMax + 1"]} />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="Alex" stroke="red" />
-          <Line type="monotone" dataKey="Darby" stroke="blue" />
-          <Line type="monotone" dataKey="Mom" stroke="pink" />
-          <Line type="monotone" dataKey="Dad" stroke="brown" />
-          <Line type="monotone" dataKey="Jon" stroke="green" />
-          <Line type="monotone" dataKey="Keely" stroke="purple" />
-        </LineChart>
+      <div className="w-full overflow-x-auto">
+        <div className="mx-auto w-fit">
+          <LineChart data={normalizedData} width={730} height={400}>
+            <CartesianGrid strokeDasharray="5" />
+            <XAxis dataKey="name" />
+            <YAxis scale="linear" interval={0} domain={[0, "dataMax + 1"]} />
+            <Tooltip />
+            <Legend />
+            <Line strokeWidth={5} type="monotone" dataKey="Alex" stroke="red" />
+            <Line
+              strokeWidth={5}
+              type="monotone"
+              dataKey="Darby"
+              stroke="blue"
+            />
+            <Line strokeWidth={5} type="monotone" dataKey="Mom" stroke="pink" />
+            <Line
+              strokeWidth={5}
+              type="monotone"
+              dataKey="Dad"
+              stroke="brown"
+            />
+            <Line
+              strokeWidth={5}
+              type="monotone"
+              dataKey="Jon"
+              stroke="green"
+            />
+            <Line
+              strokeWidth={5}
+              type="monotone"
+              dataKey="Keely"
+              stroke="purple"
+            />
+          </LineChart>
+        </div>
       </div>
     </div>
   );

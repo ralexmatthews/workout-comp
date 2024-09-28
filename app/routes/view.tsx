@@ -1,5 +1,5 @@
 import { type MetaFunction, json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useSearchParams } from "@remix-run/react";
 import { useState } from "react";
 import ChartView from "~/components/chart_view";
 import MonthlyView from "~/components/monthly_view";
@@ -21,12 +21,31 @@ export const loader = async () => {
   return json(data);
 };
 
+const getInitialViewType = (searchParams: URLSearchParams): ViewType => {
+  const viewType = searchParams.get("type");
+  switch (viewType) {
+    case "weekly":
+    case "monthly":
+    case "chart":
+      return viewType;
+    default:
+      return "weekly";
+  }
+};
+
+type ViewType = "monthly" | "weekly" | "chart";
+
 export default function View() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const data = useLoaderData<typeof loader>();
 
-  const [viewType, setViewType] = useState<"weekly" | "monthly" | "chart">(
-    "weekly"
-  );
+  const [viewType, setViewType] = useState(getInitialViewType(searchParams));
+
+  const handleSetViewType = (value: ViewType) => {
+    setViewType(value);
+    setSearchParams({ type: value });
+  };
 
   return (
     <div className="flex flex-col items-center justify-start gap-4 pt-8 px-8">
@@ -34,7 +53,7 @@ export default function View() {
       <div className="w-full flex bg-black text-white">
         <button
           type="button"
-          onClick={() => setViewType("weekly")}
+          onClick={() => handleSetViewType("weekly")}
           role="tab"
           className={`flex-1 btn ${
             viewType === "weekly" ? "btn-primary" : ""
@@ -44,7 +63,7 @@ export default function View() {
         </button>
         <button
           type="button"
-          onClick={() => setViewType("monthly")}
+          onClick={() => handleSetViewType("monthly")}
           role="tab"
           className={`flex-1 btn ${
             viewType === "monthly" ? "btn-primary" : ""
@@ -54,7 +73,7 @@ export default function View() {
         </button>
         <button
           type="button"
-          onClick={() => setViewType("chart")}
+          onClick={() => handleSetViewType("chart")}
           role="tab"
           className={`flex-1 btn ${
             viewType === "chart" ? "btn-primary" : ""
