@@ -1,4 +1,5 @@
 import { vitePlugin as remix } from "@remix-run/dev";
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
@@ -12,5 +13,12 @@ export default defineConfig({
       },
     }),
     tsconfigPaths(),
+    sentryVitePlugin({
+      org: "mine-gi",
+      project: "javascript-remix",
+    }),
   ],
+  build: {
+    sourcemap: true,
+  },
 });

@@ -8,13 +8,15 @@
     "dev": "remix vite:dev",
     "lint": "biome lint ./app",
     "lint:fix": "biome lint --write ./app",
-    "start": "remix-serve ./build/server/index.js",
+    "start": "NODE_OPTIONS='--import ./instrumentation.server.mjs' remix-serve ./build/server/index.js",
     "typecheck": "tsc"
   },
   "dependencies": {
     "@remix-run/node": "^2.12.0",
     "@remix-run/react": "^2.12.0",
     "@remix-run/serve": "^2.12.0",
+    "@sentry/remix": "^8.32.0",
+    "@sentry/vite-plugin": "^2.22.4",
     "date-fns": "^4.1.0",
     "google-auth-library": "^9.14.1",
     "google-spreadsheet": "^4.1.4",
