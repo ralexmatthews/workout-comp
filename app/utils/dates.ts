@@ -90,7 +90,7 @@ export const getReferenceDatesForMonth = (today: Date) => {
   const day = getDate(today);
 
   return [1, 8, 15, 22, 29]
-    .filter((v) => v < day)
+    .filter((v) => v <= day)
     .map((day) => {
       const newDate = new Date();
       return setDate(setMonth(setYear(newDate, year), month), day);
