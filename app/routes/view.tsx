@@ -1,5 +1,9 @@
 import { type MetaFunction, json } from "@remix-run/node";
-import { useLoaderData, useSearchParams } from "@remix-run/react";
+import {
+  ShouldRevalidateFunction,
+  useLoaderData,
+  useSearchParams,
+} from "@remix-run/react";
 import { useState } from "react";
 import ChartView from "~/components/chart_view";
 import MonthlyView from "~/components/monthly_view";
@@ -19,6 +23,20 @@ export const meta: MetaFunction = () => {
 export const loader = async () => {
   const data = await getAllData();
   return json(data);
+};
+
+export const shouldRevalidate: ShouldRevalidateFunction = ({
+  defaultShouldRevalidate,
+  currentUrl,
+  nextUrl,
+}) => {
+  // we update the search params for view type, but we don't want to refetch the
+  // data every time, so if we aren't changing paths, don't revalidate
+  if (currentUrl.pathname === nextUrl.pathname) {
+    return false;
+  }
+
+  return defaultShouldRevalidate;
 };
 
 const getInitialViewType = (searchParams: URLSearchParams): ViewType => {
