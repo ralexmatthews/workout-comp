@@ -6,7 +6,7 @@ import type { AllData, SheetDatum } from "~/utils/google_sheets";
 const getStatsByWeek = (data: SheetDatum[]) => {
   const referenceDates = getReferenceDatesForMonth(new Date());
 
-  return referenceDates
+  const statsByWeek = referenceDates
     .map((date) => [date, getWeeksRecords(data, date)] as const)
     .map(([date, data]) =>
       data.reduce(
@@ -28,6 +28,16 @@ const getStatsByWeek = (data: SheetDatum[]) => {
         }
       )
     );
+
+  return statsByWeek.map((weeklyStats) => ({
+    ...weeklyStats,
+    total:
+      weeklyStats.movePoints +
+      weeklyStats.standPoints +
+      weeklyStats.exercisePoints +
+      weeklyStats.bonusPoints +
+      (weeklyStats.bonusPoints === 7 ? 5 : 0),
+  }));
 };
 
 const getMonthlyScore = (data: ReturnType<typeof getStatsByWeek>) =>
@@ -81,8 +91,11 @@ export default function MonthlyView({ data }: { data: AllData }) {
   return (
     <div className="w-full join join-vertical">
       {monthlyOrder.map(([name, score]) => (
-        <div key={name} className="collapse collapse-arrow join-item border">
-          <input type="radio" name="weekly-accordion" />
+        <div
+          key={name}
+          tabIndex={0}
+          className="collapse collapse-arrow join-item border"
+        >
           <div className="collapse-title text-xl font-medium">
             {name} - {score} point{score === 1 ? "" : "s"}
           </div>
@@ -97,6 +110,7 @@ export default function MonthlyView({ data }: { data: AllData }) {
                     <th>Exercise</th>
                     <th>Bonus</th>
                     <th>Steps</th>
+                    <th>Total</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -108,6 +122,7 @@ export default function MonthlyView({ data }: { data: AllData }) {
                       <td>{datum.exercisePoints}</td>
                       <td>{datum.bonusPoints}</td>
                       <td>{datum.steps}</td>
+                      <td>{datum.total}</td>
                     </tr>
                   ))}
                 </tbody>

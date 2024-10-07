@@ -39,8 +39,11 @@ export default function WeeklyView({ data }: { data: AllData }) {
   return (
     <div className="w-full join join-vertical">
       {weeklyOrder.map(([name, score]) => (
-        <div key={name} className="collapse collapse-arrow join-item border">
-          <input type="radio" name="weekly-accordion" />
+        <div
+          key={name}
+          tabIndex={0}
+          className="collapse collapse-arrow join-item border"
+        >
           <div className="collapse-title text-xl font-medium">
             {name} - {score} point{score === 1 ? "" : "s"}
           </div>
