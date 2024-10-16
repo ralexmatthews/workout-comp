@@ -7,6 +7,8 @@ import {
 import { useState } from "react";
 import ChartView from "~/components/chart_view";
 import MonthlyView from "~/components/monthly_view";
+import PillSwitch from "~/components/pill_switch";
+import RawView from "~/components/raw_view";
 import WeeklyView from "~/components/weekly_view";
 import { getAllData } from "~/utils/google_sheets";
 
@@ -45,13 +47,14 @@ const getInitialViewType = (searchParams: URLSearchParams): ViewType => {
     case "weekly":
     case "monthly":
     case "chart":
+    case "raw":
       return viewType;
     default:
       return "weekly";
   }
 };
 
-type ViewType = "monthly" | "weekly" | "chart";
+type ViewType = "monthly" | "weekly" | "chart" | "raw";
 
 export default function View() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -68,41 +71,20 @@ export default function View() {
   return (
     <div className="flex flex-col items-center justify-start gap-4 pt-8 px-8">
       <h1 className="text-3xl font-bold">Standings</h1>
-      <div className="w-full flex bg-black text-white">
-        <button
-          type="button"
-          onClick={() => handleSetViewType("weekly")}
-          role="tab"
-          className={`flex-1 btn ${
-            viewType === "weekly" ? "btn-primary" : ""
-          }`.trim()}
-        >
-          Weekly
-        </button>
-        <button
-          type="button"
-          onClick={() => handleSetViewType("monthly")}
-          role="tab"
-          className={`flex-1 btn ${
-            viewType === "monthly" ? "btn-primary" : ""
-          }`.trim()}
-        >
-          Monthly
-        </button>
-        <button
-          type="button"
-          onClick={() => handleSetViewType("chart")}
-          role="tab"
-          className={`flex-1 btn ${
-            viewType === "chart" ? "btn-primary" : ""
-          }`.trim()}
-        >
-          Chart
-        </button>
-      </div>
+      <PillSwitch
+        value={viewType}
+        setValue={handleSetViewType}
+        options={[
+          { label: "Weekly", value: "weekly" },
+          { label: "Monthly", value: "monthly" },
+          { label: "Chart", value: "chart" },
+          { label: "Raw", value: "raw" },
+        ]}
+      />
       {viewType === "weekly" && <WeeklyView data={data} />}
       {viewType === "monthly" && <MonthlyView data={data} />}
       {viewType === "chart" && <ChartView data={data} />}
+      {viewType === "raw" && <RawView data={data} />}
     </div>
   );
 }
